@@ -1,0 +1,29 @@
+/* Include the padding and border in an element's total width and height */
+* {
+    box-sizing: border-box;
+  }
+
+body {
+    padding: auto;
+    margin-left: 40%;
+    margin-top: 5%;
+}
+
+h1{
+    align-content: center;
+}
+/* input {
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    width: 75%;
+    padding: 10px;
+    float: left;
+    font-size: 16px;
+  } */
+
+.container {
+    padding: 10px;
+    background-color: lightblue;
+    border-radius: 5px;
+}
