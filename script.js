@@ -9,13 +9,19 @@ button.addEventListener("click", function(e) {
     if (taskInput.value.trim() !== "") {
         const li = createDeleteTask(taskInput.value.trim());
         taskList.appendChild(li);
+
         // show the first element
         console.log("This is the first Task: ", taskList.firstElementChild.textContent);
 
-        taskInput.value = ""; // Clear input after adding the task
+        // Clear input after adding the task
+        taskInput.value = ""; 
+
+        // set the focus back to the input after adding a task
+        taskInput.focus(); 
 
     } else {
-        alert("Please enter a task!"); // throw an alert if an empty input (optional since we already have a required pattern in the input in the HTML file)
+     // throw an alert if an empty input (optional since we already have a required pattern in the input in the HTML file)
+        alert("Please enter a task!"); 
     };
 
     // show the nextSibling element
@@ -25,31 +31,67 @@ button.addEventListener("click", function(e) {
         break;
     }
     
-    // if (firstLi.nextElementSibling){
-    // console.log("This is the second Task (nextElementSibling): ", firstLi.nextElementSibling.textContent);
-    // }
 });
 
 function createDeleteTask (taskText){
     const li = document.createElement('li');
     li.classList.add("container");
     li.textContent = taskText;
-
+    
     // let's create a delete button, to remove unwanted tasks
     const deleteBtn = document.createElement('span');
-    deleteBtn.textContent = "X";
+    
+    // some of the delete button styles
+    deleteBtn.textContent = "❌";
     deleteBtn.style.color = "red";
+    deleteBtn.style.marginLeft = "10px";
+    deleteBtn.style.cursor = "pointer";
+    deleteBtn.title = "Delete-Task";
+    
     deleteBtn.classList.add("delete-btn");
     li.appendChild(deleteBtn);
-
+    
+    // adding an event listener to the delete button
     deleteBtn.addEventListener("click", function(){
-        taskList.removeChild(li);
+        if (confirm("Are you sur you want to delete this task?")) {
+            taskList.removeChild(li);
+        }
     });
-
+    
     return li;    
 }
 
-taskInput.deleteTask();
+
+
+function createTaskList() {
+    const tasks = taskList.children; // this get all child elements (li items) inside the task list (ul)
+    
+    if (tasks.length === 0) {
+        console.log("No tasks to display");
+    } else {
+        for(let task of tasks) {
+            console.log(task.textContent); // iterates over each child element (li items) in the taskList        
+        }
+    }
+}
+
+
+window.addEventListener("load", createTaskList);
+
+
+
+
+// ================== all the commented code ==================================
+
+
+// if (firstLi.nextElementSibling){
+    // console.log("This is the second Task (nextElementSibling): ", firstLi.nextElementSibling.textContent);
+    // }
+    
+    
+// taskList.createDeleteTask();
+
+
 
 // taskList.forEach(task => {
 //     console.log(task.textContent);
@@ -60,6 +102,8 @@ taskInput.deleteTask();
 //     console.log(task.textContent);
     
 // };
+
+
 // button.onclick = function() {
 //     const li = document.createElement("li");
 //     li.textContent = taskInput.value;
