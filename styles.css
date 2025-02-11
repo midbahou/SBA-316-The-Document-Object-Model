@@ -6,6 +6,7 @@
   /* body input */
 body {
   margin: 0%;
+  margin-top: 65px;
   display: flex;
   justify-content: center;
   align-items: flex-start;
