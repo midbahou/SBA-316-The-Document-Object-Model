@@ -10,6 +10,10 @@ button.addEventListener("click", function(e) {
         const li = createDeleteTask(taskInput.value.trim());
         taskList.appendChild(li);
 
+        // Change button text temporarily to "Task Added"
+        button.textContent = "Task Added!";
+        setTimeout(() => button.textContent = "Add Task", 1000);
+
         // show the first element
         console.log("This is the first Task: ", taskList.firstElementChild.textContent);
 
@@ -38,6 +42,14 @@ function createDeleteTask (taskText){
     li.classList.add("container");
     li.textContent = taskText;
     
+    // some li styles when hovering over li items
+    li.style.cursor = "pointer";
+    li.addEventListener("mouseenter", () => li.style.backgroundColor = "#f0f0f0");
+    li.addEventListener("mouseleave", () => li.style.backgroundColor = "");
+    // li.addEventListener("mouseenter", () => li.style.cursor = "pointer" )
+    // li.style.backgroundColor = "blue";
+    
+    
     // let's create a delete button, to remove unwanted tasks
     const deleteBtn = document.createElement('span');
     
@@ -53,7 +65,7 @@ function createDeleteTask (taskText){
     
     // adding an event listener to the delete button
     deleteBtn.addEventListener("click", function(){
-        if (confirm("Are you sur you want to delete this task?")) {
+        if (confirm("Are you sure you want to delete this task?")) {
             taskList.removeChild(li);
         }
     });
